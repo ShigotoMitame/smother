@@ -61,13 +61,13 @@ class Smother(object):
         self.aliases = create_path_aliases_from_coverage(self.coverage)
 
     def start(self):
-        self.coverage.collector.reset()
+        self.coverage._collector.reset()
         self.coverage.start()
 
     def save_context(self, label):
         self.data[label] = {
-            key: sorted(map(int, val.keys()))
-            for key, val in self.coverage.collector.data.items()
+            key: sorted(val.keys())
+            for key, val in self.coverage._collector.data.items()
         }
 
     def write_coverage(self):
@@ -81,7 +81,7 @@ class Smother(object):
                     {line: None for line in lines}
                 )
 
-        self.coverage.collector.data = data
+        self.coverage._collector.data = data
         self.coverage.save()
 
     def write(self, file_or_path, append=False, timeout=10):

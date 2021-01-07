@@ -43,7 +43,9 @@ setup(
     install_requires=[
         'click',
         'more_itertools',
-        'coverage>=4',
+        # Be conservative about which Coverage versions we support, as we're
+        # using internal variables
+        'coverage>=5,<6',
         'portalocker>=0.4',
         'six',
         'unidiff',
